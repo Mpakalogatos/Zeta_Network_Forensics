@@ -1,2 +1,133 @@
-# Zeta_Network_Forensics
-This tool works as an assistant and it utilize the power of LLM and its ability to summarize the complex information of a pcapng file (wireshark file).
+# 🛡️ Project Zeta: AI-Driven Network Forensic Analysis
+
+# 1. Abstract
+
+Project Zeta is a distributed Client–Server application designed for intelligent network forensic analysis and real-time threat hunting.
+
+The system transforms raw packet captures (PCAP/PCAPNG) into structured, queryable telemetry and augments them with Retrieval-Augmented Generation (RAG) to produce contextualized security insights.
+
+Instead of simply displaying packet data, Zeta introduces a semantic reasoning layer over network traffic, enabling analysts to interpret complex activity patterns with greater clarity and speed.
+
+# 2. System Architecture
+
+Project Zeta follows a distributed architecture separating ingestion, storage, and reasoning from analyst interaction.
+
+PCAP
+   ↓
+Server (Ingestion & Storage)
+   ↓
+Structured Network Memory
+   ↓
+LLM Reasoning Layer (RAG)
+   ↓
+Client Interface & Visualizations
+
+Server (Debian / Proxmox)
+
+  PCAP ingestion
+  Parsing via TShark
+  Structured metadata extraction
+  Storage in SQLite (JSON-enabled)
+  REST API built with FastAPI
+  
+The server acts as the persistent network memory core.
+
+Client (Windows 11)
+
+  CLI-based analyst interface
+  Interactive visualizations using Plotly
+  Local LLM orchestration via Ollama
+
+The client is responsible for:
+
+  Command execution
+  Data visualization
+  Context-aware querying
+  LLM interaction
+
+Database Layer
+SQLite with JSON extensions enables:
+
+  Flexible schema evolution
+  Layer-based packet representation
+  Efficient aggregation queries
+  Structured retrieval for LLM grounding
+
+# 3. Key Features & Methodology
+  A. Retrieval-Augmented Generation (RAG)
+
+  Command: /netask <query>
+  
+  The system does not operate as a generic chatbot.
+  
+  Workflow:
+  
+    User submits a security-related query.
+    The server retrieves relevant packet records from the database.
+    Structured results are injected into the LLM context.
+    The LLM generates an answer grounded in actual capture data.
+    
+  This prevents hallucination and ensures that reasoning remains evidence-based.
+  
+  LLM Model:
+  
+    Qwen (via Ollama)
+
+  B. Structured Behavioral Analysis
+
+  Zeta converts packet-level telemetry into structured, queryable representations.
+  
+  Analytical capabilities include:
+  
+    Source-to-destination flow mapping
+    Port usage distribution
+    Traffic concentration analysis
+    High-volume talker identification
+    Protocol distribution tracking
+    
+  This allows analysts to move from raw packets to interaction-level reasoning.
+
+  C. Interactive Visualizations
+
+  Visual abstractions enhance interpretability.
+  
+  Sankey Diagrams
+  
+    Source → Port → Destination flow modeling
+    Weighted interaction intensity
+  
+  Dynamic Bar Charts
+  
+    Top talkers
+    Protocol distribution
+    Real-time traffic statistics
+  
+  All visualizations are rendered via Plotly for interactive exploration.
+
+# 4. Commands & Usage
+
+  | Command             | Description                                                             |
+  | ------------------- | ----------------------------------------------------------------------- |
+  | `/netimport <file>` | Parses a PCAP/PCAPNG file and synchronizes it with the server database. |
+  | `/netstats`         | Displays high-level statistics of the current capture.                  |
+  | `/netviz --flow`    | Generates an interactive Sankey diagram of network flows.               |
+  | `/netask <query>`   | Performs a RAG-based forensic analysis using Qwen 2.5.                  |
+  | `/neofetch`         | Displays local and server system telemetry.                             |
+
+# 5. Installation & Setup
+
+  Server Side
+
+  1. Install TShark
+  2. Install dependencies:
+     pip install -r server/requirements_server.txt
+  3. Run the FastAPI server:
+     uvicorn app:app --host 0.0.0.0 --port 8000
+
+  Client Side
+
+  1. Install Ollama
+  2. Pull the LLM model:
+     ollama pull qwen2.5
+  3. Install client dependencies:
+     pip install -r client/requirments_client.txt
