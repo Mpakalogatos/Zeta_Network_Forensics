@@ -77,7 +77,7 @@ SQLite with JSON extensions enables:
         Structured retrieval for LLM grounding
 
 # 3. Key Features & Methodology
-  A. Retrieval-Augmented Generation (RAG)
+  # A. Retrieval-Augmented Generation (RAG)
 
   Command: /netask <query>
   
@@ -106,7 +106,7 @@ SQLite with JSON extensions enables:
     <img src="screenshots/top_ips_example.png" width="700" alt="netask_example">
   </p>
 
-  B. Structured Behavioral Analysis
+  # B. Structured Behavioral Analysis
 
   Zeta converts packet-level telemetry into structured, queryable representations.
   
@@ -120,7 +120,7 @@ SQLite with JSON extensions enables:
     
   This allows analysts to move from raw packets to interaction-level reasoning.
 
-  C. Interactive Visualizations
+  # C. Interactive Visualizations
 
   Visual abstractions enhance interpretability.
   
