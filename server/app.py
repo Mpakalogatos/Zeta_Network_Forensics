@@ -182,7 +182,7 @@ async def net_import_pcap(file: UploadFile = File(...)):
 
     try:
         from net_pcap_ingest import ingest_pcap_file
-        #Use the original filename as the capture_id
+        #filename as capture_id
         capture_id = file.filename
         added = ingest_pcap_file(tmp_path, capture_id=file.filename)
         return {"ok": True, "capture_id": capture_id, "chunks_added": int(added)}
@@ -736,4 +736,5 @@ def retrieve_memories(req: RetrieveReq):
 
     conn.commit()
     conn.close()
+
     return {"memories": out}
