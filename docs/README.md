@@ -145,7 +145,7 @@ SQLite with JSON extensions enables:
   - **Logic:** The model isolates anomalies based on feature deviations (for example, unusual port-to-IP fan-out, packet frequency).
   - **Threat Scoring:** Each flow is assigned a score. Zeta categorizes these into **CRITICAL, HIGH, MEDIUM,** or **LOW** threat levels based on statistical distance.
 
-  <p align="left">
+  <p align="center">
     <img src="screenshots/anomaly_command.png" width="800" alt="anomaly_command">
   </p>
   
