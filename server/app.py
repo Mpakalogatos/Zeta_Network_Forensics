@@ -182,7 +182,7 @@ async def net_import_pcap(file: UploadFile = File(...)):
 
     try:
         from net_pcap_ingest import ingest_pcap_file
-        #filename as capture_id
+        #Use the original filename as the capture_id
         capture_id = file.filename
         added = ingest_pcap_file(tmp_path, capture_id=file.filename)
         return {"ok": True, "capture_id": capture_id, "chunks_added": int(added)}
@@ -379,6 +379,27 @@ def net_viz_flow(capture_id: str):
         }
         for r in rows
     ]
+
+@app.get("/net/anomalies")
+def net_anomalies(capture_id: str):
+
+    conn = net_db()
+
+    rows = conn.execute(
+        "SELECT meta_json FROM net_memories WHERE capture_id=?",
+        (capture_id,)
+    ).fetchall()
+
+    anomalies = []
+
+    for r in rows:
+
+        meta = json.loads(r[0])
+
+        if meta.get("ml", {}).get("anomaly"):
+            anomalies.append(meta)
+
+    return anomalies
 
 @app.get("/net/stats")
 def net_stats():
@@ -736,5 +757,4 @@ def retrieve_memories(req: RetrieveReq):
 
     conn.commit()
     conn.close()
-
     return {"memories": out}
