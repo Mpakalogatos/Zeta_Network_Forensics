@@ -139,8 +139,8 @@ SQLite with JSON extensions enables:
 
   ### D. Machine Learning Anomaly Detection (Isolation Forest)
   Zeta employs an **Isolation Forest** algorithm to identify outliers in network traffic without requiring pre-labeled attack signatures.
-    - **Logic:** The model isolates anomalies based on feature deviations (for example, unusual port-to-IP fan-out, packet frequency).
-    - **Threat Scoring:** Each flow is assigned a score. Zeta categorizes these into **CRITICAL, HIGH, MEDIUM,** or **LOW** threat levels based on statistical distance.
+  - **Logic:** The model isolates anomalies based on feature deviations (for example, unusual port-to-IP fan-out, packet frequency).
+  - **Threat Scoring:** Each flow is assigned a score. Zeta categorizes these into **CRITICAL, HIGH, MEDIUM,** or **LOW** threat levels based on statistical distance.
 
 ## ⌨️ 4. Commands & Usage
 
