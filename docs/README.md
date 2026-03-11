@@ -74,13 +74,6 @@ The client is responsible for:
   - 3. Context-aware querying
   - 4. LLM interaction
 
-Database Layer
-SQLite with JSON extensions enables:
-
-  - Flexible schema evolution
-  - Layer-based packet representation
-  - Efficient aggregation queries
-  - Structured retrieval for LLM grounding
 
 ## 🔑 3. Key Features & Methodology
   ### A. Retrieval-Augmented Generation (RAG)
